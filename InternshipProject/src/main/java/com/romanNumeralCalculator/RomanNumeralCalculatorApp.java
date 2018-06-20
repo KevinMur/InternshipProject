@@ -1,7 +1,9 @@
-package com.roman_numeral_calculator.application;
+package com.romanNumeralCalculator;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+import com.romanNumeralCalculator.RomanNumeralCalculatorApp;
 
 @SpringBootApplication
 public class RomanNumeralCalculatorApp {

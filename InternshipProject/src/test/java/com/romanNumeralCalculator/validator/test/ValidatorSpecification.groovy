@@ -1,9 +1,11 @@
-package com.roman_numeral_calculator.validator.test
+package com.romanNumeralCalculator.validator.test
 
 import static org.junit.Assert.*
 
-import com.roman_numeral_calculator.validator.RomanNumeralValidator
 import org.junit.Test
+
+import com.romanNumeralCalculator.validator.RomanNumeralValidator
+
 import spock.lang.Shared
 import spock.lang.Specification
 import spock.lang.Unroll
@@ -13,7 +15,7 @@ class ValidatorSpecification extends Specification {
 	def numeralInput, validationResult
 	
 	@Unroll
-	def "validator return false for  roman numeral: #numeralInput"(){
+	def "validator should return #validationResult for  roman numeral: #numeralInput"(){
 		given: "an inavlid roman numeral is put into the validator"
 			def response = RomanNumeralValidator.validator(numeralInput)
 		expect: "response should be correct"
@@ -30,6 +32,26 @@ class ValidatorSpecification extends Specification {
 				"IIII"	 |		false
 				"LL"	 |		false
 				"CCD"	 |		false
+				"XXL"	 | 		false
+				"DD"	 |		false
+				"DM"	 |		false
+				"CCCC"	 |		false
+				"XXC"	 |		false
+				"MMMMM"  |		false
+				"I"		 |		true
+				"III"	 |		true
+				"IV"	 |		true
+				"V"		 |		true
+				"VIII"	 |		true
+				"IX"	 |		true
+				"XV"	 |		true
+				"XVIII"	 |		true
+				"XC"	 |		true
+				"XCIX"	 |		true
+				"CD"	 |		true
+				"DCCC"	 |		true
+				"MMMM"	 |		true
+				"CM"	 |		true				
 	}
 
 }
