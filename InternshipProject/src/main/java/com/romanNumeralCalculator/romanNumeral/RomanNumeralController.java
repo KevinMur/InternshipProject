@@ -35,11 +35,12 @@ public class RomanNumeralController {
 		RomanNumeral romanNumeralOne = new RomanNumeral(numeralOne);
 		RomanNumeral romanNumeralTwo = new RomanNumeral(numeralTwo);
 		RomanNumeral response = new RomanNumeral();
-		if(validator.validate(romanNumeralOne.getRomanNumeral()) && validator.validate(romanNumeralTwo.getRomanNumeral())) {
-			result = converter.convertNumeralToInt(romanNumeralOne.getRomanNumeral()) + 
-					 converter.convertNumeralToInt(romanNumeralTwo.getRomanNumeral());
+		if(validator.validate(romanNumeralOne.getNumeralValue()) && validator.validate(romanNumeralTwo.getNumeralValue())) {
+			result = converter.convertNumeralToNumber(romanNumeralOne.getNumeralValue()) + 
+					 converter.convertNumeralToNumber(romanNumeralTwo.getNumeralValue());
 
 			response.setNumericValue(result);
+			response.setNumeralValue(converter.convertNumberToNumeral(result));
 			response.setRequestSuccess(true);
 			return new ResponseEntity<RomanNumeral>(response, HttpStatus.OK);
 		}

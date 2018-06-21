@@ -37,15 +37,16 @@ class RomanNumeralControllerTest extends Specification{
 	@Autowired
 	private MockMvc mockMvc
 	
-	def numeralOne, numeralTwo, numeralOneValue, numeralTwoValue, status, numeralOneValidation, numeralTwoValidation, jsonResponse
+	def numeralOne, numeralTwo, numeralOneValue, numeralTwoValue, status, numeralOneValidation, numeralTwoValidation, jsonResponse, result
 	
 	@Unroll
 	def "Controller should return #status when roman numerals #numeralOne and #numeralTwo are passed"(){
 		given:
 			given(validator.validate(numeralOne)).willReturn(numeralOneValidation)
 			given(validator.validate(numeralTwo)).willReturn(numeralTwoValidation)
-			given(converter.convertNumeralToInt(numeralOne)).willReturn(numeralOneValue)
-			given(converter.convertNumeralToInt(numeralTwo)).willReturn(numeralOneValue)
+			given(converter.convertNumeralToNumber(numeralOne)).willReturn(numeralOneValue)
+			given(converter.convertNumeralToNumber(numeralTwo)).willReturn(numeralOneValue)
+			given(converter.convertNumberToNumeral(numeralOneValue + numeralTwoValue)).willReturn(result)
 		when: "controller recieves a request to carry out an addition"
 			def response = mockMvc.perform(get("/add").
 										  param("numeralOne", numeralOne).
@@ -55,9 +56,9 @@ class RomanNumeralControllerTest extends Specification{
 		then: "status Ok should be returned"		
 			response.andExpect(status).andExpect(content().json(jsonResponse))
 		where:
-			numeralOne	|	numeralTwo	|	numeralOneValue	|	numeralTwoValue|	status					| 	numeralOneValidation	|	numeralTwoValidation	| 	jsonResponse
-				"I"		| 		"I"		|			1		| 			1	   |	status().isOk()			|			true			|		true				|	"{'romanNumeral':'', 'numericValue': 2, 'requestsuccess':true}"
-				"I"		| 		"A"		|			1		|			0	   |	status().isBadRequest()	|			true			|		false				|	"{'romanNumeral':'', 'numericValue': 0, 'requestsuccess': false}"
-				"A"		| 		"A"		|			0		|			0	   |	status().isBadRequest()	|			false			|		false				|	"{'romanNumeral':'', 'numericValue': 0, 'requestsuccess': false}"
+			numeralOne	|	numeralTwo	|	numeralOneValue	|	numeralTwoValue|	status					| 	numeralOneValidation	|	numeralTwoValidation	| 	jsonResponse														| result
+				"I"		| 		"I"		|			1		| 			1	   |	status().isOk()			|			true			|		true				|	"{'numeralValue':'II', 'numericValue': 2, 'requestsuccess':true}"	|	"II"
+				"I"		| 		"A"		|			1		|			0	   |	status().isBadRequest()	|			true			|		false				|	"{'numeralValue':'', 'numericValue': 0, 'requestsuccess': false}"	|	""
+				"A"		| 		"A"		|			0		|			0	   |	status().isBadRequest()	|			false			|		false				|	"{'numeralValue':'', 'numericValue': 0, 'requestsuccess': false}"	|	""
 	}
 }

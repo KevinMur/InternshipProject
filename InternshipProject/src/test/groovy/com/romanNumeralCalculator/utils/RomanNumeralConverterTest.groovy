@@ -8,18 +8,19 @@ import spock.lang.Unroll
 
 class RomanNumeralConverterTest extends Specification{
 
-	def numeral, expectedOutput
+	def numeral, expectedNumber, number, expectedNumeral
 	
 	def RomanNumeralConverter converter = new RomanNumeralConverter();
 	
 	@Unroll
-	def "converter should correctly convert numeral: #numeral into #expectedOutput"(){
+	def "converter should correctly convert numeral: #numeral into #expectedNumber"(){
 		given: "the converter is passed a numeral"
-			def intOutput = converter.convertNumeralToInt(numeral)
+			def converterOutput = converter.convertNumeralToNumber(numeral)
+	
 		expect: "converter output should math the expected result"
-			intOutput == expectedOutput
+			converterOutput  == expectedNumber
 		where:
-			numeral		|	expectedOutput
+			numeral		|	expectedNumber
 				"I"		|		1
 				"IV"	|		4
 				"V"		|		5
@@ -45,6 +46,37 @@ class RomanNumeralConverterTest extends Specification{
 				"MMMCM"	|		3900
 	
 	}
-		
-
+	
+	@Unroll
+	def "converter should correct conver #number into #expectedNumeral"(){
+		given: "the converter is passed a number"
+			def converterOutput = converter.convertNumberToNumeral(number)
+		expect: "converter should output the expected result"
+			converterOutput == expectedNumeral
+		where:
+				number	|	expectedNumeral
+				1		|		"I"
+				4		|		"IV"
+				5		|		"V"
+				8		|		"VIII"
+				9		|		"IX"
+				10		|		"X"
+				12		|		"XII"
+				14		|		"XIV"
+				20		|		"XX"
+				40		|		"XL"
+				49		|		"XLIX"
+				50		|		"L"
+				90		|		"XC"
+				100		|		"C"
+				150		|		"CL"
+				130		|		"CXXX"
+				500		|		"D"
+				400		|		"CD"
+				670		|		"DCLXX"
+				900		|		"CM"
+				1000	|		"M"
+				1962	|		"MCMLXII"
+				3900	|		"MMMCM"			
+	}
 }

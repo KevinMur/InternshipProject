@@ -2,17 +2,17 @@ package com.romanNumeralCalculator.romanNumeral;
 
 public class RomanNumeral {
 
-	private String romanNumeral;
+	private String numeralValue;
 	private int numericValue;
 	private boolean requestSuccess;
 	
 	public RomanNumeral() {
-		romanNumeral = "";
+		numeralValue = "";
 		numericValue = 0;
 		requestSuccess = false;
 	}
 	public RomanNumeral(String romanNumeral) {
-		this.romanNumeral = romanNumeral;
+		this.numeralValue = romanNumeral;
 	}
 	
 	public int getNumericValue() {
@@ -23,12 +23,12 @@ public class RomanNumeral {
 		this.numericValue = numericValue;
 	}
 	
-	public String getRomanNumeral() {
-		return romanNumeral;
+	public String getNumeralValue() {
+		return numeralValue;
 	}
 	
-	public void setRomanNumeral(String romanNumeral) {
-		this.romanNumeral = romanNumeral;
+	public void setNumeralValue(String numeralValue) {
+		this.numeralValue = numeralValue;
 	}
 	
 	public boolean getRequestsuccess() {

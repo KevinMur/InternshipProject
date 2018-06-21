@@ -31,7 +31,7 @@ function addNumerals(){
 		},
 		success: function(numeral){
 			console.log(numeral);
-            $("#calculationResult").text("Result: " + numeral.romanNumeral);
+            $("#calculationResult").text("Result: " + numeral.numeralValue);
             $("#validationText").empty();
 		},
         error: function(){
