@@ -13,6 +13,7 @@ import org.springframework.boot.test.mock.mockito.MockBean
 import org.springframework.test.context.ActiveProfiles
 import org.springframework.test.web.servlet.MockMvc
 import com.romanNumeralCalculator.romanNumeral.RomanNumeralController
+import com.romanNumeralCalculator.utils.RomanNumeralConverter
 import com.romanNumeralCalculator.utils.RomanNumeralValidator
 
 import spock.lang.Specification
@@ -20,6 +21,8 @@ import spock.lang.Unroll
 import org.springframework.http.MediaType
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content
 import static org.mockito.BDDMockito.*
 
 @WebMvcTest
@@ -28,16 +31,21 @@ class RomanNumeralControllerTest extends Specification{
 	@MockBean
 	RomanNumeralValidator validator
 	
+	@MockBean
+	RomanNumeralConverter converter
+	
 	@Autowired
 	private MockMvc mockMvc
 	
-	def numeralOne, numeralTwo, status, numeralOneValidation, numeralTwoValidation
+	def numeralOne, numeralTwo, numeralOneValue, numeralTwoValue, status, numeralOneValidation, numeralTwoValidation, jsonResponse
 	
 	@Unroll
 	def "Controller should return #status when roman numerals #numeralOne and #numeralTwo are passed"(){
 		given:
 			given(validator.validate(numeralOne)).willReturn(numeralOneValidation)
 			given(validator.validate(numeralTwo)).willReturn(numeralTwoValidation)
+			given(converter.convertNumeralToInt(numeralOne)).willReturn(numeralOneValue)
+			given(converter.convertNumeralToInt(numeralTwo)).willReturn(numeralOneValue)
 		when: "controller recieves a request to carry out an addition"
 			def response = mockMvc.perform(get("/add").
 										  param("numeralOne", numeralOne).
@@ -45,12 +53,11 @@ class RomanNumeralControllerTest extends Specification{
 										  contentType(MediaType.APPLICATION_JSON))
 			
 		then: "status Ok should be returned"		
-			response.andExpect(status)
+			response.andExpect(status).andExpect(content().json(jsonResponse))
 		where:
-			numeralOne	|	numeralTwo		|		status					| 	numeralOneValidation	|	numeralTwoValidation
-				"I"		| 		"I"			|		status().isOk()			|			true			|		true
-				"I"		| 		"A"			|		status().isBadRequest()	|			true			|		false
-				"A"		| 		"A"			|		status().isBadRequest()	|			false			|		false
-		
+			numeralOne	|	numeralTwo	|	numeralOneValue	|	numeralTwoValue|	status					| 	numeralOneValidation	|	numeralTwoValidation	| 	jsonResponse
+				"I"		| 		"I"		|			1		| 			1	   |	status().isOk()			|			true			|		true				|	"{'romanNumeral':'', 'numericValue': 2, 'requestsuccess':true}"
+				"I"		| 		"A"		|			1		|			0	   |	status().isBadRequest()	|			true			|		false				|	"{'romanNumeral':'', 'numericValue': 0, 'requestsuccess': false}"
+				"A"		| 		"A"		|			0		|			0	   |	status().isBadRequest()	|			false			|		false				|	"{'romanNumeral':'', 'numericValue': 0, 'requestsuccess': false}"
 	}
 }

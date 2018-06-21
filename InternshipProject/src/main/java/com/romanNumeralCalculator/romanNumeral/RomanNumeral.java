@@ -4,7 +4,13 @@ public class RomanNumeral {
 
 	private String romanNumeral;
 	private int numericValue;
+	private boolean requestSuccess;
 	
+	public RomanNumeral() {
+		romanNumeral = "";
+		numericValue = 0;
+		requestSuccess = false;
+	}
 	public RomanNumeral(String romanNumeral) {
 		this.romanNumeral = romanNumeral;
 	}
@@ -23,5 +29,13 @@ public class RomanNumeral {
 	
 	public void setRomanNumeral(String romanNumeral) {
 		this.romanNumeral = romanNumeral;
+	}
+	
+	public boolean getRequestsuccess() {
+		return requestSuccess;
+	}
+	
+	public void setRequestSuccess(boolean requestSuccess) {
+		this.requestSuccess = requestSuccess;
 	}
 }

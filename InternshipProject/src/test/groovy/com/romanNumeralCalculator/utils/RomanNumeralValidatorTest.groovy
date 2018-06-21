@@ -10,11 +10,12 @@ import com.romanNumeralCalculator.utils.RomanNumeralValidator
 import spock.lang.Specification
 import spock.lang.Unroll
 
-class ValidatorTest extends Specification{
+class RomanNumeralValidatorTest extends Specification{
 
 	def numeralInput, validationResult
 
 	def RomanNumeralValidator romanNumeralValidator = new RomanNumeralValidator();
+	
 	@Unroll
 	def "validator should return #validationResult for  roman numeral: #numeralInput"(){
 		given: "an inavlid roman numeral is put into the validator"

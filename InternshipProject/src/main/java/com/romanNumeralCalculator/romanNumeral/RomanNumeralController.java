@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.romanNumeralCalculator.utils.RomanNumeralConverter;
 import com.romanNumeralCalculator.utils.RomanNumeralValidator;
 
 @Controller
@@ -15,6 +16,9 @@ public class RomanNumeralController {
 	
 	@Autowired
 	private RomanNumeralValidator validator;
+	
+	@Autowired
+	private RomanNumeralConverter converter;
 	
 	/**
 	 * @param numeralOne
@@ -27,15 +31,19 @@ public class RomanNumeralController {
 	 */
 	@RequestMapping(method = RequestMethod.GET,  value = "/add")
 	public ResponseEntity<RomanNumeral> addNumerals(@RequestParam("numeralOne") String numeralOne, @RequestParam("numeralTwo") String numeralTwo) {	
-		
+		int result = 0;
 		RomanNumeral romanNumeralOne = new RomanNumeral(numeralOne);
 		RomanNumeral romanNumeralTwo = new RomanNumeral(numeralTwo);
-		
+		RomanNumeral response = new RomanNumeral();
 		if(validator.validate(romanNumeralOne.getRomanNumeral()) && validator.validate(romanNumeralTwo.getRomanNumeral())) {
-			RomanNumeral test = new RomanNumeral("Valid");
-			return new ResponseEntity<RomanNumeral>(test, HttpStatus.OK);
+			result = converter.convertNumeralToInt(romanNumeralOne.getRomanNumeral()) + 
+					 converter.convertNumeralToInt(romanNumeralTwo.getRomanNumeral());
+
+			response.setNumericValue(result);
+			response.setRequestSuccess(true);
+			return new ResponseEntity<RomanNumeral>(response, HttpStatus.OK);
 		}
-		
-		return new ResponseEntity<RomanNumeral>(HttpStatus.BAD_REQUEST);
+
+		return new ResponseEntity<RomanNumeral>(response, HttpStatus.BAD_REQUEST);
 	}
 }
