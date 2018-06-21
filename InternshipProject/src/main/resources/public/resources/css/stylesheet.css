@@ -1,0 +1,29 @@
+#calculatorBody{
+	background-image: url('/resources/images/RomanNumeralBackground.jpg');
+	background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#calculatorContainer{
+    width: 30%;
+    margin-top: 10%;
+}
+
+#addButton{
+    width:50%;
+    margin: auto;
+}
+
+#validationText{
+	text-align: center;
+	color: red;
+	margin-top: 8%;
+	font-size: 120%;
+}
+
+#calculationResult{
+    text-align: center;
+	color: black;
+	margin-top: 8%;
+	font-size: 120%;
+}

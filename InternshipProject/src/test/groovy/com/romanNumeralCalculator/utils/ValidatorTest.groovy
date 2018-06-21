@@ -1,23 +1,24 @@
-package com.romanNumeralCalculator.validator.test
+package com.romanNumeralCalculator.utils
 
 import static org.junit.Assert.*
 
 import org.junit.Test
+import org.springframework.beans.factory.annotation.Autowired
 
-import com.romanNumeralCalculator.validator.RomanNumeralValidator
+import com.romanNumeralCalculator.utils.RomanNumeralValidator
 
-import spock.lang.Shared
 import spock.lang.Specification
 import spock.lang.Unroll
 
-class ValidatorSpecification extends Specification {
-	
+class ValidatorTest extends Specification{
+
 	def numeralInput, validationResult
-	
+
+	def RomanNumeralValidator romanNumeralValidator = new RomanNumeralValidator();
 	@Unroll
 	def "validator should return #validationResult for  roman numeral: #numeralInput"(){
 		given: "an inavlid roman numeral is put into the validator"
-			def response = RomanNumeralValidator.validator(numeralInput)
+			def response = romanNumeralValidator.validate(numeralInput)
 		expect: "response should be correct"
 			response == validationResult
 		where:
@@ -53,5 +54,4 @@ class ValidatorSpecification extends Specification {
 				"MMMM"	 |		true
 				"CM"	 |		true				
 	}
-
 }
