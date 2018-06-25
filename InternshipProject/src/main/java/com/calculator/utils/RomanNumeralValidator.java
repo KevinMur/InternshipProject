@@ -1,4 +1,4 @@
-package com.romanNumeralCalculator.utils;
+package com.calculator.utils;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -12,13 +12,13 @@ public class RomanNumeralValidator {
 	
 	/**
 	 * @param romanNumeral
-	 * 		the roman numeral that this validator takes in
+	 * 	the roman numeral to be validated
 	 * @return
-	 * 		return true or false depending on the result of the roman numeral being checked against the regex
+	 * 	return true or false depending on the result of the roman numeral being checked against the regex
 	 */
-	public boolean validate(String romanNumeral) {
-		Pattern pattern = Pattern.compile(ROMAN_NUMERAL_REGEX);
-		Matcher matcher = pattern.matcher(romanNumeral);	
+	public boolean validate(final String romanNumeral) {
+		final Pattern pattern = Pattern.compile(ROMAN_NUMERAL_REGEX);
+		final Matcher matcher = pattern.matcher(romanNumeral);	
 		return matcher.matches();			
 	}
 }

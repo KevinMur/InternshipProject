@@ -1,17 +1,29 @@
-package com.romanNumeralCalculator.utils;
+package com.calculator.utils;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
-import org.springframework.stereotype.Service;
 
-@Service
+/**
+ * @author ekvumer
+ * 
+ *      Class used to convert from numerals to numbers and vice-versa
+ *
+ */
 public class RomanNumeralConverter {
+	
+	/**
+	 * @param numeral
+	 *     numeral that is going to be converted to a number
+	 * @return
+	 *     the number that the numeral entered represented
+	 */
+	public int convertNumeralToNumber(final String numeral) {
+		int convertedTotal = 0;
+		int currentValue = 0;
+		int previousValue = 0;
 
-	public int convertNumeralToNumber(String numeral) {
-		int convertedTotal = 0, currentValue = 0, previousValue = 0;
-
-		Map<Character, Integer> valueMap = mapForConvertingNumerals();
+		final Map<Character, Integer> valueMap = mapForConvertingNumerals();
 
 		for(int i = numeral.length()-1; i >= 0; i--) {
 			currentValue = valueMap.get(numeral.charAt(i));
@@ -25,23 +37,30 @@ public class RomanNumeralConverter {
 		return convertedTotal;
 	}
 
+	/**
+	 * @param numeralValue
+	 *     number that is going to be converted into a numeral
+	 * @return
+	 * 
+	 *     the numeral string that is a representation of the number inputted
+	 */
 	public String convertNumberToNumeral(int numeralValue) {
-		String numeralOutput = "";
-		Map<Integer, String> valueMap = mapForConvertingNumbers();
+		final StringBuilder numeralOutput = new StringBuilder();
+		final Map<Integer, String> valueMap = mapForConvertingNumbers();
 		while(numeralValue > 0) {
-			for (Map.Entry<Integer, String> entry : valueMap.entrySet()){
+			for (final Map.Entry<Integer, String> entry : valueMap.entrySet()){
 				if (numeralValue >= entry.getKey()){
-					numeralOutput += entry.getValue();
+				        numeralOutput.append(entry.getValue());
 					numeralValue -= entry.getKey();
 					break;
 				}
 			}
 		}
-		return numeralOutput;
+		return numeralOutput.toString();
 	}
 
 	private Map<Character, Integer> mapForConvertingNumerals(){
-		Map<Character, Integer> valueMap = new HashMap<>();
+		final Map<Character, Integer> valueMap = new HashMap<>();
 		valueMap.put('M', 1000);
 		valueMap.put('D', 500);
 		valueMap.put('C', 100);
@@ -53,7 +72,7 @@ public class RomanNumeralConverter {
 	}
 
 	private Map<Integer, String> mapForConvertingNumbers(){
-		Map<Integer, String> valueMap = new LinkedHashMap<>();
+		final Map<Integer, String> valueMap = new LinkedHashMap<>();
 		valueMap.put(1000, "M");
 		valueMap.put(900, "CM");
 		valueMap.put(500, "D");

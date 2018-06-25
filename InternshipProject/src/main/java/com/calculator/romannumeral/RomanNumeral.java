@@ -1,33 +1,30 @@
-package com.romanNumeralCalculator.romanNumeral;
+package com.calculator.romannumeral;
 
+/**
+ * @author ekvumer
+ * 
+ *      Roman Numeral class 
+ *      
+ *
+ */
 public class RomanNumeral {
 
 	private String numeralValue;
-	private int numericValue;
 	private boolean requestSuccess;
 	
 	public RomanNumeral() {
 		numeralValue = "";
-		numericValue = 0;
 		requestSuccess = false;
 	}
-	public RomanNumeral(String romanNumeral) {
+	public RomanNumeral(final String romanNumeral) {
 		this.numeralValue = romanNumeral;
-	}
-	
-	public int getNumericValue() {
-		return numericValue;
-	}
-	
-	public void setNumericValue(int numericValue) {
-		this.numericValue = numericValue;
 	}
 	
 	public String getNumeralValue() {
 		return numeralValue;
 	}
 	
-	public void setNumeralValue(String numeralValue) {
+	public void setNumeralValue(final String numeralValue) {
 		this.numeralValue = numeralValue;
 	}
 	
@@ -35,7 +32,7 @@ public class RomanNumeral {
 		return requestSuccess;
 	}
 	
-	public void setRequestSuccess(boolean requestSuccess) {
+	public void setRequestSuccess(final boolean requestSuccess) {
 		this.requestSuccess = requestSuccess;
 	}
 }
