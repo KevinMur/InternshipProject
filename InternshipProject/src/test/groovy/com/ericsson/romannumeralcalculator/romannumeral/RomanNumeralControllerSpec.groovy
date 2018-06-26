@@ -27,11 +27,12 @@ class RomanNumeralControllerSpec extends Specification{
         given: "calclator service returns result of addition.."
         def validNumeral = new RomanNumeral()
         validNumeral.setNumeralValue("II")
-        calculator.add(_ as String, _ as String) >>> validNumeral
+        calculator.calculate(_ as String, _ as String, _ as String) >>> validNumeral
 
         when: "controller recieves a request to carry out an addition"
-        def response = mockMvc.perform(get("/calculator/add").param("numeralOne", "I").
-                param("numeralTwo", "I").contentType(MediaType.APPLICATION_JSON))
+        def response = mockMvc.perform(get("/calculator").param("numeralOne", "I").
+                param("numeralTwo", "I").param("operation", "ADD").contentType(MediaType.APPLICATION_JSON))
+
 
         then: "status Ok should be returned"
         response.andExpect(status().isOk())
@@ -39,11 +40,11 @@ class RomanNumeralControllerSpec extends Specification{
 
     def "Controller should return bad request status "(){
         given: "calculator will throw exception"
-        doThrow(ValidationException.class).when(calculator).add(_ as String, _ as String)
+        doThrow(ValidationException.class).when(calculator).calculate(_ as String, _ as String, _ as String)
 
         when: "controller recieves a request to carry out an addition"
-        def response = mockMvc.perform(get("/calculator/add").param("numeralOne", _ as String).
-                param("numeralTwo", _ as String).contentType(MediaType.APPLICATION_JSON))
+        def response = mockMvc.perform(get("/calculator").param("numeralOne", _ as String).
+                param("numeralTwo", _ as String).param("operation", _ as String).contentType(MediaType.APPLICATION_JSON))
 
         then: "status Bad Request should be returned"
         response.andExpect(status().isBadRequest())

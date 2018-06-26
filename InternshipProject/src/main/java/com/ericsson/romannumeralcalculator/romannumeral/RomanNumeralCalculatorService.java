@@ -3,8 +3,8 @@ package com.ericsson.romannumeralcalculator.romannumeral;
 import org.springframework.stereotype.Service;
 
 import com.ericsson.romannumeralcalculator.exceptions.ValidationException;
-import com.ericsson.romannumeralcalculator.operations.AddOperation;
 import com.ericsson.romannumeralcalculator.operations.Context;
+import com.ericsson.romannumeralcalculator.operations.OperationFactory;
 import com.ericsson.romannumeralcalculator.validator.RomanNumeralValidator;
 
 /**
@@ -25,10 +25,11 @@ public class RomanNumeralCalculatorService {
      * @return Roman numeral object that stores the result of the addition
      */
 
-    public RomanNumeral add(final String numeralOne, final String numeralTwo) {
+    public RomanNumeral calculate(final String numeralOne, final String numeralTwo, final String operator) {
         final RomanNumeralValidator validator = new RomanNumeralValidator();
+
         if (validator.validate(numeralOne) && validator.validate(numeralTwo)) {
-            final Context context = new Context(new AddOperation());
+            final Context context = new Context(OperationFactory.getOperation(operator));
             return context.executeOperation(numeralOne, numeralTwo);
         } else {
             throw new ValidationException(numeralOne + " " + numeralTwo);

@@ -9,9 +9,10 @@
     margin-top: 10%;
 }
 
-#addButton{
+#addButton, #subtractButton{
     width:50%;
     margin: auto;
+    margin-top: 1%;
 }
 
 #validationText{
