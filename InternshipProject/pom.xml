@@ -12,15 +12,15 @@
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>2.0.0.RELEASE</version>
 	</parent>
-	
+
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.build.outputEncoding>UTF-8</project.build.outputEncoding>
 		<java.version>1.8</java.version>
 		<sonar.host.url>https://sonarqube.lmera.ericsson.se/</sonar.host.url>
-        <sonar.login>71bb7eba8f3d1ab0b1f6c58f65b986b14bf7675a</sonar.login>
-        <sonar.analysis.mode>preview</sonar.analysis.mode>
-        <maven.sonar-plugin.version>3.2</maven.sonar-plugin.version>
+		<sonar.login>71bb7eba8f3d1ab0b1f6c58f65b986b14bf7675a</sonar.login>
+		<sonar.analysis.mode>preview</sonar.analysis.mode>
+		<maven.sonar-plugin.version>3.2</maven.sonar-plugin.version>
 	</properties>
 
 	<build>
@@ -75,7 +75,7 @@
 					</includes>
 				</configuration>
 			</plugin>
-			<!-- <plugin>
+			<plugin>
 				<groupId>org.sonarsource.scanner.maven</groupId>
 				<artifactId>sonar-maven-plugin</artifactId>
 				<version>3.2</version>
@@ -88,22 +88,31 @@
 						</goals>
 					</execution>
 				</executions>
-			</plugin> -->
-			<!-- Static analysis of code with SonarQube -->
-			<!-- <plugin>
-				<groupId>org.sonarsource.scanner.maven</groupId>
-				<artifactId>sonar-maven-plugin</artifactId>
-				<version>${maven.sonar-plugin.version}</version>
+			</plugin>
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>0.8.0</version>
+				<configuration>
+					<goal>
+						<goalPrefix>jacoco</goalPrefix>
+					</goal>
+				</configuration>
 				<executions>
 					<execution>
-						<id>validate-checkstyle</id>
-						<phase>verify</phase>
 						<goals>
-							<goal>sonar</goal>
+							<goal>prepare-agent</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>report</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>report</goal>
 						</goals>
 					</execution>
 				</executions>
-			</plugin> -->
+			</plugin>
 		</plugins>
 	</build>
 
@@ -148,6 +157,13 @@
 			<groupId>org.spockframework</groupId>
 			<artifactId>spock-spring</artifactId>
 			<version>1.1-groovy-2.4</version>
+			<scope>test</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.hamcrest</groupId>
+			<artifactId>hamcrest-all</artifactId>
+			<version>1.3</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>

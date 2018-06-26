@@ -1,8 +1,8 @@
-package com.calculator.utils
+package com.ericsson.romannumeralcalculator.converter
 
 import org.junit.Test
 
-import com.calculator.utils.RomanNumeralConverter
+import com.ericsson.romannumeralcalculator.converter.RomanNumeralConverter
 
 import spock.lang.Specification
 import spock.lang.Unroll

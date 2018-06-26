@@ -22,7 +22,7 @@ function addNumerals(){
     console.log(numeralTwo);
 	$.ajax({
 		type: 'GET',
-		url: "/add",
+		url: "/calculator/add",
 		contentType: "application/json",
 		dataType: "json",
 		data: {

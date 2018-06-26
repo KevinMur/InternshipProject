@@ -1,6 +1,6 @@
-package com.calculator.utils;
+package com.ericsson.romannumeralcalculator.operations;
 
-import com.calculator.romannumeral.RomanNumeral;
+import com.ericsson.romannumeralcalculator.romannumeral.RomanNumeral;
 
 /**
  * @author ekvumer
@@ -8,6 +8,6 @@ import com.calculator.romannumeral.RomanNumeral;
  *      to be carried out by the calculator application 
  *
  */
-public interface Strategy {
+public interface Operation {
     RomanNumeral doOperation(final String numeralOne, final String numeralTwo);
 }
