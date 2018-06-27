@@ -30,7 +30,6 @@ public class AddOperation implements Operation {
     @Override
     public RomanNumeral doOperation(final String numeralOne, final String numeralTwo) {
         final RomanNumeral romanNumeral = new RomanNumeral();
-        //final RomanNumeralConverter converter = new RomanNumeralConverter();
         final int result = converter.convertNumeralToNumber(numeralOne) + converter.convertNumeralToNumber(numeralTwo);
         romanNumeral.setNumeralValue(converter.convertNumberToNumeral(result));
         return romanNumeral;

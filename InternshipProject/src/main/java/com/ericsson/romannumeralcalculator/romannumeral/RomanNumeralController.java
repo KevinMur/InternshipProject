@@ -30,14 +30,14 @@ public class RomanNumeralController {
     @RequestMapping(method = RequestMethod.GET, value = "/add")
     public ResponseEntity<RomanNumeral> addCalculation(@RequestParam("numeralOne") final String numeralOne,
                                                        @RequestParam("numeralTwo") final String numeralTwo) {
-        final RomanNumeral response = calculator.calculate(numeralOne, numeralTwo, "ADD");
+        final RomanNumeral response = calculator.add(numeralOne, numeralTwo);
         return ResponseEntity.ok(response);
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/subtract")
     public ResponseEntity<RomanNumeral> subtractCalculation(@RequestParam("numeralOne") final String numeralOne,
                                                             @RequestParam("numeralTwo") final String numeralTwo) {
-        final RomanNumeral response = calculator.calculate(numeralOne, numeralTwo, "SUBTRACT");
+        final RomanNumeral response = calculator.subtract(numeralOne, numeralTwo);
         return ResponseEntity.ok(response);
     }
 }

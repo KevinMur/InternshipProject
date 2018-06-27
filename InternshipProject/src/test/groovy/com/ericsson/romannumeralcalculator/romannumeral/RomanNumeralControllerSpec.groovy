@@ -28,7 +28,7 @@ class RomanNumeralControllerSpec extends Specification{
         given: "calculator will return valid roman numeral object"
         def numeral = new RomanNumeral()
         numeral.setNumeralValue("II")
-        given(calculator.calculate("I", "I", "ADD")).willReturn(numeral)
+        given(calculator.add("I", "I")).willReturn(numeral)
 
         when: "controller recieves a request to carry out an addition"
         def response = mockMvc.perform(get("/calculator/add").param("numeralOne", "I").
@@ -40,7 +40,7 @@ class RomanNumeralControllerSpec extends Specification{
 
     def "Controller should return bad request status for addition"(){
         given: "calculator will throw exception"
-        doThrow(ValidationException.class).when(calculator).calculate("I", "6", "ADD")
+        doThrow(ValidationException.class).when(calculator).add("I", "6")
 
         when: "controller recieves a request to carry out an addition"
         def response = mockMvc.perform(get("/calculator/add").param("numeralOne", "I").
@@ -54,7 +54,7 @@ class RomanNumeralControllerSpec extends Specification{
         given: "calculator will return valid roman numeral object"
         def numeral = new RomanNumeral()
         numeral.setNumeralValue("IV")
-        given(calculator.calculate("V", "I", "SUBTRACT")).willReturn(numeral)
+        given(calculator.subtract("V", "I")).willReturn(numeral)
 
         when: "controller recieves a request to carry out a subtraction"
         def response = mockMvc.perform(get("/calculator/subtract").param("numeralOne", "V").
@@ -66,7 +66,7 @@ class RomanNumeralControllerSpec extends Specification{
 
     def "Controller should return bad request status for subtraction"(){
         given: "calculator will throw exception"
-        doThrow(ValidationException.class).when(calculator).calculate("X", "6", "SUBTRACT")
+        doThrow(ValidationException.class).when(calculator).subtract("X", "6")
 
         when: "controller recieves a request to carry out an addition"
         def response = mockMvc.perform(get("/calculator/subtract").param("numeralOne", "X").

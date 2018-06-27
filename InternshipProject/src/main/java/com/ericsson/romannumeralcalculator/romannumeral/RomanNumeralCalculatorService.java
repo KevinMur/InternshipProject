@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ericsson.romannumeralcalculator.exceptions.ValidationException;
-import com.ericsson.romannumeralcalculator.operations.Context;
 import com.ericsson.romannumeralcalculator.operations.OperationFactory;
 import com.ericsson.romannumeralcalculator.validator.RomanNumeralValidator;
 
@@ -22,7 +21,7 @@ public class RomanNumeralCalculatorService {
     RomanNumeralValidator validator;
 
     @Autowired
-    OperationFactory operationFactory;
+    private OperationFactory operationFactory;
 
     /**
      * @param numeralOne
@@ -34,10 +33,17 @@ public class RomanNumeralCalculatorService {
      * @return Roman numeral object that stores the result of the addition
      */
 
-    public RomanNumeral calculate(final String numeralOne, final String numeralTwo, final String operator) {
+    public RomanNumeral add(final String numeralOne, final String numeralTwo) {
         if (validator.validate(numeralOne) && validator.validate(numeralTwo)) {
-            final Context context = new Context(operationFactory.getOperation(operator));
-            return context.executeOperation(numeralOne, numeralTwo);
+            return operationFactory.getOperation("addOperation").doOperation(numeralOne, numeralTwo);
+        } else {
+            throw new ValidationException(numeralOne + " " + numeralTwo);
+        }
+    }
+
+    public RomanNumeral subtract(final String numeralOne, final String numeralTwo) {
+        if (validator.validate(numeralOne) && validator.validate(numeralTwo)) {
+            return operationFactory.getOperation("subtractOperation").doOperation(numeralOne, numeralTwo);
         } else {
             throw new ValidationException(numeralOne + " " + numeralTwo);
         }
