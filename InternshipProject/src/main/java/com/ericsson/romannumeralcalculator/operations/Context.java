@@ -8,6 +8,7 @@ import com.ericsson.romannumeralcalculator.romannumeral.RomanNumeral;
  *         Context class that stores and executes a strategy
  *
  */
+
 public class Context {
 
     private final Operation operation;

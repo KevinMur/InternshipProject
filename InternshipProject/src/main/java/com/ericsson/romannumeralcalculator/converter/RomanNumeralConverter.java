@@ -4,13 +4,15 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import org.springframework.stereotype.Component;
+
 /**
  * @author ekvumer
  *
  *         Class used to convert from numerals to numbers and vice-versa
  *
  */
-
+@Component
 public class RomanNumeralConverter {
 
     private static final Map<Character, Integer> CONVERT_TO_NUMBER_MAP = new HashMap<>();

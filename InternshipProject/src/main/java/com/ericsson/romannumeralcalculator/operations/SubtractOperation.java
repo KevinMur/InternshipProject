@@ -1,8 +1,11 @@
 package com.ericsson.romannumeralcalculator.operations;
 
+import org.springframework.stereotype.Component;
+
 import com.ericsson.romannumeralcalculator.converter.RomanNumeralConverter;
 import com.ericsson.romannumeralcalculator.romannumeral.RomanNumeral;
 
+@Component
 public class SubtractOperation implements Operation {
 
     @Override

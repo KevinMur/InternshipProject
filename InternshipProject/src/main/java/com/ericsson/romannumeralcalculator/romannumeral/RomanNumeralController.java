@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
  *
  */
 @RestController
+@RequestMapping("/calculator")
 public class RomanNumeralController {
 
     @Autowired
@@ -26,11 +27,17 @@ public class RomanNumeralController {
      *            the second roman numeral received from the http GETT request to be used in the calculation
      * @return A response entity containing a roman numeral object where the result of the calculation is stored
      */
-    @RequestMapping(method = RequestMethod.GET, value = "/calculator", produces = { "application/json" })
-    public ResponseEntity<RomanNumeral> addNumerals(@RequestParam("numeralOne") final String numeralOne,
-                                                    @RequestParam("numeralTwo") final String numeralTwo,
-                                                    @RequestParam("operation") final String operation) {
-        final RomanNumeral response = calculator.calculate(numeralOne, numeralTwo, operation);
+    @RequestMapping(method = RequestMethod.GET, value = "/add")
+    public ResponseEntity<RomanNumeral> addCalculation(@RequestParam("numeralOne") final String numeralOne,
+                                                       @RequestParam("numeralTwo") final String numeralTwo) {
+        final RomanNumeral response = calculator.calculate(numeralOne, numeralTwo, "ADD");
+        return ResponseEntity.ok(response);
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/subtract")
+    public ResponseEntity<RomanNumeral> subtractCalculation(@RequestParam("numeralOne") final String numeralOne,
+                                                            @RequestParam("numeralTwo") final String numeralTwo) {
+        final RomanNumeral response = calculator.calculate(numeralOne, numeralTwo, "SUBTRACT");
         return ResponseEntity.ok(response);
     }
 }

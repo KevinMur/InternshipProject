@@ -1,11 +1,21 @@
 package com.ericsson.romannumeralcalculator.romannumeral
 
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.boot.test.context.SpringBootTest
+
 import com.ericsson.romannumeralcalculator.exceptions.ValidationException
+import com.ericsson.romannumeralcalculator.validator.RomanNumeralValidator
 
 import spock.lang.Specification
+
+@SpringBootTest
 class CalculatorServiceSpec extends Specification{
 
-    def RomanNumeralCalculatorService calculator = new RomanNumeralCalculatorService();
+    @Autowired
+    RomanNumeralCalculatorService calculator
+
+    @Autowired
+    RomanNumeralValidator validator
 
     def "calulator returns correct result for addition of two roman numerals"(){
         when: "two numerals are put into the calculator"
@@ -18,8 +28,6 @@ class CalculatorServiceSpec extends Specification{
     def numeralOne, numeralTwo, expectedResult
 
     def "calulator returns correct result for subtraction of two roman numerals"(){
-
-
         when: "two numerals are put into the calculator"
         def result = calculator.calculate(numeralOne, numeralTwo, "SUBTRACT")
 
