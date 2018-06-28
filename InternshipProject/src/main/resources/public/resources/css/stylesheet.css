@@ -1,3 +1,6 @@
+
+
+
 #calculatorBody{
 	background-image: url('/resources/images/RomanNumeralBackground.jpg');
 	background-repeat: no-repeat;
@@ -5,14 +8,34 @@
 }
 
 #calculatorContainer{
-    width: 30%;
+    width: 70%;
     margin-top: 10%;
 }
 
-#addButton, #subtractButton{
-    width:50%;
+#numeralInputOne, #numeralInputTwo{
+	float: left;
+	margin-left: 6.6%;
+	margin-bottom: 3%;
+	margin-top: 3%;
+	width:40%;
+}
+
+#buttonDiv{
+	width: 100%;
+}
+
+#addButton, #subtractButton, #multiplyButton, #divideButton{
+	float: left;
+    width:20%;
     margin: auto;
     margin-top: 1%;
+    margin-left: 4%;
+    background-color: rgb(211, 158, 78);
+    border: rgb(211, 158, 78);
+}
+
+#numeralInputOne:focus,  #numeralInputTwo:focus{ 	
+    box-shadow: 0 0 20px rgb(211, 158, 78);
 }
 
 #validationText{

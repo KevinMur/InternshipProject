@@ -19,20 +19,18 @@
     <div class="card mx-auto mt-5">
       <div class="card-header">Enter Two Roman Numerals</div>
       <div class="card-body" id="calculatorCardBody">
-        <form method="post" id="calculatorForm">
           <div class="form-group">
-            <label for="numeralInputOne">Numeral 1: </label>
             <input class="form-control" id="numeralInputOne" type="text" name="numeralInputOne" aria-describedby="emailHelp" placeholder="Roman Numeral One" required>
-          </div>
-          <div class="form-group">
-            <label for="numeralInputTwo">Numeral 2: </label>
             <input class="form-control" id="numeralInputTwo" type="text" name="numeralInputTwo" aria-describedby="emailHelp" placeholder="Roman Numeral Two" required>
           </div>
-          <button class="btn btn-primary btn-block" id="addButton">Add</button>
-          <button class="btn btn-primary btn-block" id="subtractButton">Subtract</button>
+          <div id="buttonDiv">
+          	<button class="btn btn-primary btn-block" id="addButton">Add</button>
+          	<button class="btn btn-primary btn-block" id="subtractButton">Subtract</button>
+         	 <button class="btn btn-primary btn-block" id="multiplyButton">Multiply</button>
+         	 <button class="btn btn-primary btn-block" id="divideButton">Divide</button>
+          </div>
           <p id="validationText"></p>
           <p id="calculationResult"></p>
-        </form>
       </div>
     </div>
   </div>

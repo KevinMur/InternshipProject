@@ -40,4 +40,18 @@ public class RomanNumeralController {
         final RomanNumeral response = calculator.subtract(numeralOne, numeralTwo);
         return ResponseEntity.ok(response);
     }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/multiply")
+    public ResponseEntity<RomanNumeral> multiplyCalculation(@RequestParam("numeralOne") final String numeralOne,
+                                                            @RequestParam("numeralTwo") final String numeralTwo) {
+        final RomanNumeral response = calculator.multiply(numeralOne, numeralTwo);
+        return ResponseEntity.ok(response);
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/divide")
+    public ResponseEntity<RomanNumeral> divideCalculation(@RequestParam("numeralOne") final String numeralOne,
+                                                          @RequestParam("numeralTwo") final String numeralTwo) {
+        final RomanNumeral response = calculator.divide(numeralOne, numeralTwo);
+        return ResponseEntity.ok(response);
+    }
 }

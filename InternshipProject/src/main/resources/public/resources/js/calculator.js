@@ -6,8 +6,6 @@ $('document').ready(function(){
 		if(validateInputs()){
 			addNumerals();
 		}
-
-
 		return false;
 	});
 
@@ -17,16 +15,34 @@ $('document').ready(function(){
 		}
 		return false;
 	});
-	/*
-    $(document).on("keyup", "#numeralInput1", function(){
-        addNumerals();
+	
+	$(document).on('click', '#multiplyButton', function(){
+		if(validateInputs()){
+			multiplyNumerals();
+		}
+		return false;
 	});
-
-    $(document).on("keyup", "#numeralInput2", function(){
-        addNumerals();
+	
+	$(document).on('click', '#divideButton', function(){
+		if(validateInputs()){
+			divideNumerals();
+		}
+		return false;
 	});
-	 */
 });
+
+function validateInputs(){
+	numeralOne = $("#numeralInputOne").val();
+	numeralTwo = $("#numeralInputTwo").val();
+	console.log(numeralOne)
+	console.log(numeralTwo)
+	if(numeralOne == "" || numeralTwo == ""){
+		$("#validationText").text("Both Fields Required!!");
+		$("#calculationResult").empty();
+		return false;
+	}
+	return true;
+}
 
 function addNumerals(){   
 	numeralOne = $("#numeralInputOne").val();
@@ -80,15 +96,54 @@ function subtractNumerals(){
 	});
 }
 
-function validateInputs(){
+function multiplyNumerals(){   
 	numeralOne = $("#numeralInputOne").val();
 	numeralTwo = $("#numeralInputTwo").val();
-	console.log(numeralOne)
-	console.log(numeralTwo)
-	if(numeralOne == "" || numeralTwo == ""){
-		$("#validationText").text("Both Fields Required!!");
-		$("#calculationResult").empty();
-		return false;
-	}
-	return true;
+	console.log(numeralOne);
+	console.log(numeralTwo);
+	$.ajax({
+		type: 'GET',
+		url: "/calculator/multiply",
+		contentType: "application/json",
+		dataType: "json",
+		data: {
+			numeralOne: numeralOne,
+			numeralTwo : numeralTwo
+		},
+		success: function(numeral){
+			console.log(numeral);
+			$("#calculationResult").text("Result: " + numeral.numeralValue);
+			$("#validationText").empty();
+		},
+		error: function(){
+			$("#calculationResult").empty();
+			$("#validationText").text("Incorrect Numeral Entered!");
+		}
+	});
+}
+
+function divideNumerals(){   
+	numeralOne = $("#numeralInputOne").val();
+	numeralTwo = $("#numeralInputTwo").val();
+	console.log(numeralOne);
+	console.log(numeralTwo);
+	$.ajax({
+		type: 'GET',
+		url: "/calculator/divide",
+		contentType: "application/json",
+		dataType: "json",
+		data: {
+			numeralOne: numeralOne,
+			numeralTwo : numeralTwo
+		},
+		success: function(numeral){
+			console.log(numeral);
+			$("#calculationResult").text("Result: " + numeral.numeralValue);
+			$("#validationText").empty();
+		},
+		error: function(){
+			$("#calculationResult").empty();
+			$("#validationText").text("Incorrect Numeral Entered!");
+		}
+	});
 }

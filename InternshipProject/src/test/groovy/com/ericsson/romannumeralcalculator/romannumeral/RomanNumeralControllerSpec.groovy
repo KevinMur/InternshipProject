@@ -75,4 +75,56 @@ class RomanNumeralControllerSpec extends Specification{
         then: "status Bad Request should be returned"
         response.andExpect(status().isBadRequest())
     }
+
+    def "Controller should return ok status for multiplication and valid response content"() {
+        given: "calculator will return valid roman numeral object"
+        def numeral = new RomanNumeral()
+        numeral.setNumeralValue("X")
+        given(calculator.multiply("V", "II")).willReturn(numeral)
+
+        when: "controller recieves a request to carry out a subtraction"
+        def response = mockMvc.perform(get("/calculator/multiply").param("numeralOne", "V").
+                param("numeralTwo", "II").contentType(MediaType.APPLICATION_JSON))
+
+        then: "status Ok should be returned with valid JSON content"
+        response.andExpect(status().isOk()).andExpect(content().json("{'numeralValue' : 'X'}"))
+    }
+
+    def "Controller should return bad request status for multiplication"(){
+        given: "calculator will throw exception"
+        doThrow(ValidationException.class).when(calculator).multiply("X", "6")
+
+        when: "controller recieves a request to carry out an addition"
+        def response = mockMvc.perform(get("/calculator/multiply").param("numeralOne", "X").
+                param("numeralTwo", "6").contentType(MediaType.APPLICATION_JSON))
+
+        then: "status Bad Request should be returned"
+        response.andExpect(status().isBadRequest())
+    }
+
+    def "Controller should return ok status for division and valid response content"() {
+        given: "calculator will return valid roman numeral object"
+        def numeral = new RomanNumeral()
+        numeral.setNumeralValue("IV")
+        given(calculator.divide("VIII", "II")).willReturn(numeral)
+
+        when: "controller recieves a request to carry out a subtraction"
+        def response = mockMvc.perform(get("/calculator/divide").param("numeralOne", "VIII").
+                param("numeralTwo", "II").contentType(MediaType.APPLICATION_JSON))
+
+        then: "status Ok should be returned with valid JSON content"
+        response.andExpect(status().isOk()).andExpect(content().json("{'numeralValue' : 'IV'}"))
+    }
+
+    def "Controller should return bad request status for division"(){
+        given: "calculator will throw exception"
+        doThrow(ValidationException.class).when(calculator).divide("X", "6")
+
+        when: "controller recieves a request to carry out an addition"
+        def response = mockMvc.perform(get("/calculator/divide").param("numeralOne", "X").
+                param("numeralTwo", "6").contentType(MediaType.APPLICATION_JSON))
+
+        then: "status Bad Request should be returned"
+        response.andExpect(status().isBadRequest())
+    }
 }

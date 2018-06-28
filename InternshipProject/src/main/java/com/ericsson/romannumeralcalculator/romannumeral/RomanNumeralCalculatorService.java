@@ -48,4 +48,20 @@ public class RomanNumeralCalculatorService {
             throw new ValidationException(numeralOne + " " + numeralTwo);
         }
     }
+
+    public RomanNumeral multiply(final String numeralOne, final String numeralTwo) {
+        if (validator.validate(numeralOne) && validator.validate(numeralTwo)) {
+            return operationFactory.getOperation("multiplyOperation").doOperation(numeralOne, numeralTwo);
+        } else {
+            throw new ValidationException(numeralOne + " " + numeralTwo);
+        }
+    }
+
+    public RomanNumeral divide(final String numeralOne, final String numeralTwo) {
+        if (validator.validate(numeralOne) && validator.validate(numeralTwo)) {
+            return operationFactory.getOperation("divideOperation").doOperation(numeralOne, numeralTwo);
+        } else {
+            throw new ValidationException(numeralOne + " " + numeralTwo);
+        }
+    }
 }
