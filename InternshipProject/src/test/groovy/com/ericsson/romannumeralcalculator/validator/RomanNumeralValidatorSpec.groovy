@@ -7,7 +7,7 @@ class RomanNumeralValidatorSpec extends Specification{
 
     def numeralInput, validationResult
 
-    def RomanNumeralValidator romanNumeralValidator = new RomanNumeralValidator();
+    def Validator romanNumeralValidator = new Validator();
 
     @Unroll
     def "validator should return false for invalid numeral roman numeral: #numeralInput"(){

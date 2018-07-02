@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
  *
  */
 @Component
-public class RomanNumeralConverter {
+public class Converter {
 
     private static final Map<Character, Integer> CONVERT_TO_NUMBER_MAP = new HashMap<>();
     private static final Map<Integer, String> CONVERT_TO_NUMERAL_MAP = new LinkedHashMap<>();
@@ -42,11 +42,6 @@ public class RomanNumeralConverter {
         CONVERT_TO_NUMERAL_MAP.put(1, "I");
     }
 
-    /**
-     * @param numeral
-     *            numeral that is going to be converted to a number
-     * @return the number that the numeral entered represented
-     */
     public int convertNumeralToNumber(final String numeral) {
         int convertedTotal = 0;
         int currentValue = 0;
@@ -65,12 +60,11 @@ public class RomanNumeralConverter {
     }
 
     /**
+     * A linked hash map is used for this conversion as the order that the keys are put into this map are kept and this method takes advantage of this
+     * property
+     * 
      * @param numeralValue
      *            number that is going to be converted into a numeral
-     *
-     *            a linked hash map is used for this conversion as the order that the keys are put into this map are kept and this method takes
-     *            advantage of this property
-     *
      * @return
      *
      *         the numeral string that is a representation of the number inputted

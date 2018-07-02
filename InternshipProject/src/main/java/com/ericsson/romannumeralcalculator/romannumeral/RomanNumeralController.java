@@ -20,13 +20,6 @@ public class RomanNumeralController {
     @Autowired
     RomanNumeralCalculatorService calculator;
 
-    /**
-     * @param numeralOne
-     *            the first roman numeral received from the http GET request to be used in the calculation
-     * @param numeralTwo
-     *            the second roman numeral received from the http GETT request to be used in the calculation
-     * @return A response entity containing a roman numeral object where the result of the calculation is stored
-     */
     @RequestMapping(method = RequestMethod.GET, value = "/add")
     public ResponseEntity<RomanNumeral> addCalculation(@RequestParam("numeralOne") final String numeralOne,
                                                        @RequestParam("numeralTwo") final String numeralTwo) {

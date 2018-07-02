@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import com.ericsson.romannumeralcalculator.exceptions.ValidationException;
 
 /**
- * Class to handle any exceptions that may be thrown in this application
- *
  * @author ekvumer
+ *
+ *         Class to handle any exceptions that may be thrown in this application
  *
  */
 

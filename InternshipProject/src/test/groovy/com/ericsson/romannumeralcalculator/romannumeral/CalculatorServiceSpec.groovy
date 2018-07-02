@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 
 import com.ericsson.romannumeralcalculator.exceptions.ValidationException
-import com.ericsson.romannumeralcalculator.validator.RomanNumeralValidator
+import com.ericsson.romannumeralcalculator.validator.Validator
 
 import spock.lang.Specification
 
@@ -15,7 +15,7 @@ class CalculatorServiceSpec extends Specification{
     RomanNumeralCalculatorService calculator
 
     @Autowired
-    RomanNumeralValidator validator
+    Validator validator
 
 
     def "calulator returns correct result for addition of two roman numerals"(){

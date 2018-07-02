@@ -3,10 +3,9 @@ package com.ericsson.romannumeralcalculator.romannumeral;
 /**
  * @author ekvumer
  *
- *         Roman Numeral class
- *
- *
+ *         Roman Numeral class used to return numeral information back to the UI
  */
+
 public class RomanNumeral {
 
     private String numeralValue;

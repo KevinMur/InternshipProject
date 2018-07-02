@@ -2,7 +2,7 @@ package com.ericsson.romannumeralcalculator.converter
 
 import org.junit.Test
 
-import com.ericsson.romannumeralcalculator.converter.RomanNumeralConverter
+import com.ericsson.romannumeralcalculator.converter.Converter
 
 import spock.lang.Specification
 import spock.lang.Unroll
@@ -11,7 +11,7 @@ class RomanNumeralConverterSpec extends Specification{
 
 	def numeral, expectedNumber, number, expectedNumeral
 	
-	def RomanNumeralConverter converter = new RomanNumeralConverter();
+	def Converter converter = new Converter();
 	
 	@Unroll
 	def "converter should correctly convert numeral: #numeral into #expectedNumber"(){

@@ -6,19 +6,17 @@ import java.util.regex.Pattern;
 import org.springframework.stereotype.Component;
 
 /**
- * @author ekvumer Roman numeral validator class used for validation
+ * @author ekvumer
+ *
+ *         Roman numeral validator class used for validation. Validation regex source:
+ *         https://stackoverflow.com/questions/267399/how-do-you-match-only-valid-roman-numerals-with-a-regular-expression
  *
  */
 @Component
-public class RomanNumeralValidator {
+public class Validator {
 
     private static final String ROMAN_NUMERAL_REGEX = "^M{0,4}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})$";
 
-    /**
-     * @param romanNumeral
-     *            the roman numeral to be validated
-     * @return returns true or false depending on the result of the roman numeral being checked against the regex
-     */
     public boolean validate(final String romanNumeral) {
         final Pattern pattern = Pattern.compile(ROMAN_NUMERAL_REGEX);
         final Matcher matcher = pattern.matcher(romanNumeral);

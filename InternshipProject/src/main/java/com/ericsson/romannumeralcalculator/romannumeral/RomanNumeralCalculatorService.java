@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.ericsson.romannumeralcalculator.exceptions.ValidationException;
 import com.ericsson.romannumeralcalculator.operations.OperationFactory;
-import com.ericsson.romannumeralcalculator.validator.RomanNumeralValidator;
+import com.ericsson.romannumeralcalculator.validator.Validator;
 
 /**
  * @author ekvumer
@@ -18,26 +18,16 @@ import com.ericsson.romannumeralcalculator.validator.RomanNumeralValidator;
 public class RomanNumeralCalculatorService {
 
     @Autowired
-    RomanNumeralValidator validator;
+    Validator validator;
 
     @Autowired
     private OperationFactory operationFactory;
-
-    /**
-     * @param numeralOne
-     *            First numeral entered by the user
-     * @param numeralTwo
-     *            First numeral entered by the user
-     * @param operator
-     *            The operation to be carried out on the two numerals
-     * @return Roman numeral object that stores the result of the addition
-     */
 
     public RomanNumeral add(final String numeralOne, final String numeralTwo) {
         if (validator.validate(numeralOne) && validator.validate(numeralTwo)) {
             return operationFactory.getOperation("addOperation").doOperation(numeralOne, numeralTwo);
         } else {
-            throw new ValidationException(numeralOne + " " + numeralTwo);
+            throw new ValidationException(numeralOne + ", " + numeralTwo);
         }
     }
 
@@ -45,7 +35,7 @@ public class RomanNumeralCalculatorService {
         if (validator.validate(numeralOne) && validator.validate(numeralTwo)) {
             return operationFactory.getOperation("subtractOperation").doOperation(numeralOne, numeralTwo);
         } else {
-            throw new ValidationException(numeralOne + " " + numeralTwo);
+            throw new ValidationException(numeralOne + ", " + numeralTwo);
         }
     }
 
@@ -53,7 +43,7 @@ public class RomanNumeralCalculatorService {
         if (validator.validate(numeralOne) && validator.validate(numeralTwo)) {
             return operationFactory.getOperation("multiplyOperation").doOperation(numeralOne, numeralTwo);
         } else {
-            throw new ValidationException(numeralOne + " " + numeralTwo);
+            throw new ValidationException(numeralOne + ", " + numeralTwo);
         }
     }
 
@@ -61,7 +51,7 @@ public class RomanNumeralCalculatorService {
         if (validator.validate(numeralOne) && validator.validate(numeralTwo)) {
             return operationFactory.getOperation("divideOperation").doOperation(numeralOne, numeralTwo);
         } else {
-            throw new ValidationException(numeralOne + " " + numeralTwo);
+            throw new ValidationException(numeralOne + ", " + numeralTwo);
         }
     }
 }
