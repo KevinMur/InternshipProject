@@ -33,6 +33,7 @@
 				<groupId>org.codehaus.gmaven</groupId>
 				<artifactId>gmaven-plugin</artifactId>
 				<version>1.4</version>
+				
 				<configuration>
 					<providerSelection>2.0</providerSelection>
 					<source />
@@ -128,18 +129,12 @@
 									<descriptorRef>artifact</descriptorRef>
 								</assembly>
 							</build>
-							<run>
-								<ports>
-									<port>tomcat.port:8080</port>
-								</ports>
-							</run>
 						</image>
 					</images>
 				</configuration>
 			</plugin>
 		</plugins>
 	</build>
-
 
 	<dependencies>
 		<dependency>

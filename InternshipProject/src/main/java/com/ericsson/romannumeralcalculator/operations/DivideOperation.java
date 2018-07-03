@@ -22,7 +22,11 @@ public class DivideOperation implements Operation {
     public RomanNumeral doOperation(final String numeralOne, final String numeralTwo) {
         final RomanNumeral romanNumeral = new RomanNumeral();
         final int result = converter.convertNumeralToNumber(numeralOne) / converter.convertNumeralToNumber(numeralTwo);
-        romanNumeral.setNumeralValue(converter.convertNumberToNumeral(result));
+        if (result == 0) {
+            romanNumeral.setNumeralValue("Nulla");
+        } else {
+            romanNumeral.setNumeralValue(converter.convertNumberToNumeral(result));
+        }
         return romanNumeral;
     }
 }

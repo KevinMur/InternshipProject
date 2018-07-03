@@ -18,7 +18,7 @@ import com.ericsson.romannumeralcalculator.validator.Validator;
 public class RomanNumeralCalculatorService {
 
     @Autowired
-    Validator validator;
+    private Validator validator;
 
     @Autowired
     private OperationFactory operationFactory;

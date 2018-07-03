@@ -46,9 +46,9 @@ class CalculatorServiceSpec extends Specification{
 
         where:
         numeralOne   |      numeralTwo      |       expectedResult
-        "X"      |        "II"          |           "VIII"
-        "V"      |        "X"           |            "-V"
-        "X"      |        "X"           |            "Nulla"
+        "X"          |        "II"          |           "VIII"
+        "V"          |        "X"           |            "-V"
+        "X"          |        "X"           |            "Nulla"
     }
 
     def "calculator throws a validation exception when an invalid numeral is entered in subtraction"(){
@@ -78,10 +78,15 @@ class CalculatorServiceSpec extends Specification{
 
     def "calulator returns correct result for division of two roman numerals"(){
         when: "two numerals are put into the calculator"
-        def result = calculator.divide("VIII", "II")
+        def result = calculator.divide(numeralOne, numeralTwo)
 
         then: "a roman numeral object is returned with the correct numeral value"
-        result.getNumeralValue() == "IV"
+        result.getNumeralValue() == expectedResult
+
+        where:
+        numeralOne  |       numeralTwo      |       expectedResult
+        "X"         |           "II"        |            "V"
+        "II"        |           "X"         |            "Nulla"
     }
 
     def "calculator throws a validation exception when an invalid numeral is entered in division"(){

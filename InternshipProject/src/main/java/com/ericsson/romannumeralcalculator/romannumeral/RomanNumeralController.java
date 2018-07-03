@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class RomanNumeralController {
 
     @Autowired
-    RomanNumeralCalculatorService calculator;
+    private RomanNumeralCalculatorService calculator;
 
     @RequestMapping(method = RequestMethod.GET, value = "/add")
     public ResponseEntity<RomanNumeral> addCalculation(@RequestParam("numeralOne") final String numeralOne,

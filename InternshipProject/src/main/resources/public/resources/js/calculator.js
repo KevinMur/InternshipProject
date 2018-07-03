@@ -34,10 +34,8 @@ $('document').ready(function(){
 function validateInputs(){
 	numeralOne = $("#numeralInputOne").val();
 	numeralTwo = $("#numeralInputTwo").val();
-	console.log(numeralOne)
-	console.log(numeralTwo)
 	if(numeralOne == "" || numeralTwo == ""){
-		$("#validationText").text("Both Fields Required!!");
+		$("#validationText").text("Both Fields Are Required !");
 		$("#calculationResult").empty();
 		return false;
 	}
@@ -45,10 +43,6 @@ function validateInputs(){
 }
 
 function addNumerals(){   
-	numeralOne = $("#numeralInputOne").val();
-	numeralTwo = $("#numeralInputTwo").val();
-	console.log(numeralOne);
-	console.log(numeralTwo);
 	$.ajax({
 		type: 'GET',
 		url: "/calculator/add",
@@ -60,7 +54,7 @@ function addNumerals(){
 		},
 		success: function(numeral){
 			console.log(numeral);
-			$("#calculationResult").text("Result: " + numeral.numeralValue);
+			$("#calculationResult").text("Result: " + numeralOne + " + " + numeralTwo + " = " + numeral.numeralValue);
 			$("#validationText").empty();
 		},
 		error: function(){
@@ -71,10 +65,6 @@ function addNumerals(){
 }
 
 function subtractNumerals(){   
-	numeralOne = $("#numeralInputOne").val();
-	numeralTwo = $("#numeralInputTwo").val();
-	console.log(numeralOne);
-	console.log(numeralTwo);
 	$.ajax({
 		type: 'GET',
 		url: "/calculator/subtract",
@@ -86,7 +76,7 @@ function subtractNumerals(){
 		},
 		success: function(numeral){
 			console.log(numeral);
-			$("#calculationResult").text("Result: " + numeral.numeralValue);
+			$("#calculationResult").text("Result: " + numeralOne + " - " + numeralTwo + " = " + numeral.numeralValue);
 			$("#validationText").empty();
 		},
 		error: function(){
@@ -97,10 +87,6 @@ function subtractNumerals(){
 }
 
 function multiplyNumerals(){   
-	numeralOne = $("#numeralInputOne").val();
-	numeralTwo = $("#numeralInputTwo").val();
-	console.log(numeralOne);
-	console.log(numeralTwo);
 	$.ajax({
 		type: 'GET',
 		url: "/calculator/multiply",
@@ -112,7 +98,7 @@ function multiplyNumerals(){
 		},
 		success: function(numeral){
 			console.log(numeral);
-			$("#calculationResult").text("Result: " + numeral.numeralValue);
+			$("#calculationResult").text("Result: " + numeralOne + " * " + numeralTwo + " = " + numeral.numeralValue);
 			$("#validationText").empty();
 		},
 		error: function(){
@@ -123,10 +109,6 @@ function multiplyNumerals(){
 }
 
 function divideNumerals(){   
-	numeralOne = $("#numeralInputOne").val();
-	numeralTwo = $("#numeralInputTwo").val();
-	console.log(numeralOne);
-	console.log(numeralTwo);
 	$.ajax({
 		type: 'GET',
 		url: "/calculator/divide",
@@ -138,7 +120,7 @@ function divideNumerals(){
 		},
 		success: function(numeral){
 			console.log(numeral);
-			$("#calculationResult").text("Result: " + numeral.numeralValue);
+			$("#calculationResult").text("Result: " + numeralOne + " / " + numeralTwo + " = " + numeral.numeralValue);
 			$("#validationText").empty();
 		},
 		error: function(){
