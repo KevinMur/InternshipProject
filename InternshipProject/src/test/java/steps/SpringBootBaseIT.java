@@ -20,14 +20,6 @@ public class SpringBootBaseIT {
     }
 
     public ResponseEntity<RomanNumeral> get(final String operation, final String romanNumeralExpression) throws UnsupportedEncodingException {
-        //        final UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(calculatorEndpoint() + "/" + operation).queryParam("numeralExpression",
-        //                romanNumeralExpression);
-        //
-        //        final String uri = builder.build().encode().toUriString();
-        //        return new RestTemplate().getForEntity(uri, RomanNumeral.class);
-        //        if (romanNumeralExpression.contains("+")) {
-        //            romanNumeralExpression = romanNumeralExpression.replace("+", "%2B");
-        //        }
         return restTemplate.getForEntity(
                 calculatorEndpoint() + "/" + operation + "?numeralExpression=" + URLEncoder.encode(romanNumeralExpression, "UTF-8"),
                 RomanNumeral.class);

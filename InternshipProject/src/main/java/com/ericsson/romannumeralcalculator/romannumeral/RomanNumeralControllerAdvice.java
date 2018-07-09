@@ -27,13 +27,13 @@ public class RomanNumeralControllerAdvice {
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
-    //    /**
-    //     * General exception handler
-    //     *
-    //     * @return returns a ResponseEntity object with a 500 error code
-    //     */
-    //    @ExceptionHandler(Exception.class)
-    //    public ResponseEntity<Object> handleUnexpectedError() {
-    //        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-    //    }
+    /**
+     * General exception handler
+     *
+     * @return returns a ResponseEntity object with a 500 error code
+     */
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<Object> handleUnexpectedError() {
+        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+    }
 }

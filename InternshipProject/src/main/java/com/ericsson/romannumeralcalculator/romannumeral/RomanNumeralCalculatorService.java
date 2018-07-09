@@ -28,7 +28,6 @@ public class RomanNumeralCalculatorService {
     private OperationInvoker operationInvoker;
 
     public RomanNumeral add(final String numeralExpression) {
-        System.out.println(numeralExpression);
         final String[] numerals = retrieveNumeralsFromExpression(numeralExpression);
         if (validator.validate(numerals[0]) && validator.validate(numerals[1])) {
             return operationInvoker.execute("addOperation", numerals[0], numerals[1]);
