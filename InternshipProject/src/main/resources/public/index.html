@@ -17,20 +17,13 @@
 <body class="bg-dark" id="calculatorBody">
   <div class="container" id="calculatorContainer">
     <div class="card mx-auto mt-5">
-      <div class="card-header">Enter Two Roman Numerals</div>
+      <div class="card-header">Please Enter Roman Numeral Expression To Calculate:</div>
       <div class="card-body" id="calculatorCardBody">
           <div class="form-group">
-            <input class="form-control" id="numeralInputOne" type="text" name="numeralInputOne" aria-describedby="emailHelp" placeholder="Roman Numeral One" required>
-            <input class="form-control" id="numeralInputTwo" type="text" name="numeralInputTwo" aria-describedby="emailHelp" placeholder="Roman Numeral Two" required>
-          </div>
-          <div id="buttonDiv">
-          	<button class="btn btn-primary btn-block" id="addButton">Add</button>
-          	<button class="btn btn-primary btn-block" id="subtractButton">Subtract</button>
-         	 <button class="btn btn-primary btn-block" id="multiplyButton">Multiply</button>
-         	 <button class="btn btn-primary btn-block" id="divideButton">Divide</button>
-          </div>
-          <p id="validationText"></p>
-          <p id="calculationResult"></p>
+            <input class="form-control" id="numeralInput" type="text" name="numeralInput" aria-describedby="emailHelp" placeholder="Roman Numeral Expression" required>
+          	<button class="btn btn-primary btn-block" id="calculateButton">Calculate</button>
+          </div>        
+          <p id="calculationResultText"></p>
       </div>
     </div>
   </div>

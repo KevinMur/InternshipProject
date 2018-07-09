@@ -10,7 +10,32 @@ class RomanNumeralValidatorSpec extends Specification{
     def Validator romanNumeralValidator = new Validator();
 
     @Unroll
-    def "validator should return false for invalid numeral roman numeral: #numeralInput"(){
+    def "validator should return false if numerals 'I', 'X' or 'C' occur more than three times in a row"(){
+        when: 'invalid numeral passed to validator'
+        def response = romanNumeralValidator.validate(numeralInput)
+
+        then: "response should be false"
+        response == false
+
+        where:
+        numeralInput << ["IIII", "XXXX", "CCCC"]
+    }
+
+    @Unroll
+    def "validator should return false if numerals 'V', 'L' or 'D' occur more than once in a row"(){
+        when: 'invalid numeral passed to validator'
+        def response = romanNumeralValidator.validate(numeralInput)
+
+        then: "response should be false"
+        response == false
+
+        where:
+        numeralInput << ["VV", "LL", "DD"]
+    }
+
+
+    @Unroll
+    def "validator should return false if format of numeral is invalid: #numeralInput"(){
         when: 'invalid numeral passed to validator'
         def response = romanNumeralValidator.validate(numeralInput)
 
@@ -19,21 +44,10 @@ class RomanNumeralValidatorSpec extends Specification{
 
         where:
         numeralInput << [
-            "1",
-            "A",
-            "IA2",
+            "I1",
+            "XA",
             "IIV",
-            "IIX",
-            "VV",
-            "VX",
-            "IIII",
-            "LL",
-            "CCD",
-            "XXL",
-            "DD",
-            "DM",
-            "CCCC",
-            "XXC",
+            "IIIV",
             "MMMMM"
         ]
     }

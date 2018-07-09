@@ -4,7 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ericsson.romannumeralcalculator.exceptions.ValidationException;
-import com.ericsson.romannumeralcalculator.operations.OperationFactory;
+import com.ericsson.romannumeralcalculator.operations.OperationInvoker;
+import com.ericsson.romannumeralcalculator.validator.ExpressionSplitter;
 import com.ericsson.romannumeralcalculator.validator.Validator;
 
 /**
@@ -21,37 +22,52 @@ public class RomanNumeralCalculatorService {
     private Validator validator;
 
     @Autowired
-    private OperationFactory operationFactory;
+    private ExpressionSplitter splitter;
 
-    public RomanNumeral add(final String numeralOne, final String numeralTwo) {
-        if (validator.validate(numeralOne) && validator.validate(numeralTwo)) {
-            return operationFactory.getOperation("addOperation").doOperation(numeralOne, numeralTwo);
+    @Autowired
+    private OperationInvoker operationInvoker;
+
+    public RomanNumeral add(final String numeralExpression) {
+        System.out.println(numeralExpression);
+        final String[] numerals = retrieveNumeralsFromExpression(numeralExpression);
+        if (validator.validate(numerals[0]) && validator.validate(numerals[1])) {
+            return operationInvoker.execute("addOperation", numerals[0], numerals[1]);
         } else {
-            throw new ValidationException(numeralOne + ", " + numeralTwo);
+            throw new ValidationException(numerals[0] + ", " + numerals[1]);
         }
     }
 
-    public RomanNumeral subtract(final String numeralOne, final String numeralTwo) {
-        if (validator.validate(numeralOne) && validator.validate(numeralTwo)) {
-            return operationFactory.getOperation("subtractOperation").doOperation(numeralOne, numeralTwo);
+    public RomanNumeral subtract(final String numeralExpression) {
+        final String[] numerals = retrieveNumeralsFromExpression(numeralExpression);
+        if (validator.validate(numerals[0]) && validator.validate(numerals[1])) {
+            return operationInvoker.execute("subtractOperation", numerals[0], numerals[1]);
         } else {
-            throw new ValidationException(numeralOne + ", " + numeralTwo);
+            throw new ValidationException(numerals[0] + ", " + numerals[1]);
         }
     }
 
-    public RomanNumeral multiply(final String numeralOne, final String numeralTwo) {
-        if (validator.validate(numeralOne) && validator.validate(numeralTwo)) {
-            return operationFactory.getOperation("multiplyOperation").doOperation(numeralOne, numeralTwo);
+    public RomanNumeral multiply(final String numeralExpression) {
+        final String[] numerals = retrieveNumeralsFromExpression(numeralExpression);
+        if (validator.validate(numerals[0]) && validator.validate(numerals[1])) {
+            return operationInvoker.execute("multiplyOperation", numerals[0], numerals[1]);
         } else {
-            throw new ValidationException(numeralOne + ", " + numeralTwo);
+            throw new ValidationException(numerals[0] + ", " + numerals[1]);
         }
     }
 
-    public RomanNumeral divide(final String numeralOne, final String numeralTwo) {
-        if (validator.validate(numeralOne) && validator.validate(numeralTwo)) {
-            return operationFactory.getOperation("divideOperation").doOperation(numeralOne, numeralTwo);
+    public RomanNumeral divide(final String numeralExpression) {
+        final String[] numerals = retrieveNumeralsFromExpression(numeralExpression);
+        if (validator.validate(numerals[0]) && validator.validate(numerals[1])) {
+            return operationInvoker.execute("divideOperation", numerals[0], numerals[1]);
         } else {
-            throw new ValidationException(numeralOne + ", " + numeralTwo);
+            throw new ValidationException(numerals[0] + ", " + numerals[1]);
         }
+    }
+
+    private String[] retrieveNumeralsFromExpression(final String expression) {
+        final String[] splitExpression = splitter.splitExpression(expression);
+        final String numeralOne = splitExpression[0];
+        final String numeralTwo = splitExpression[2];
+        return new String[] { numeralOne, numeralTwo };
     }
 }

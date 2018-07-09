@@ -9,45 +9,35 @@
 
 #calculatorContainer{
     width: 70%;
-    margin-top: 10%;
+    margin-top: 15%;
 }
 
-#numeralInputOne, #numeralInputTwo{
+#numeralInput{
 	float: left;
 	margin-left: 6.6%;
 	margin-bottom: 3%;
 	margin-top: 3%;
-	width:40%;
+	width:60%;
 }
 
-#buttonDiv{
-	width: 100%;
-}
-
-#addButton, #subtractButton, #multiplyButton, #divideButton{
+#calculateButton{
 	float: left;
     width:20%;
     margin: auto;
-    margin-top: 1%;
+    margin-top: 3%;
     margin-left: 4%;
     background-color: rgb(211, 158, 78);
     border: rgb(211, 158, 78);
+
 }
 
-#numeralInputOne:focus,  #numeralInputTwo:focus{ 	
+#numeralInput:focus{ 	
     box-shadow: 0 0 20px rgb(211, 158, 78);
 }
 
-#validationText{
-	text-align: center;
-	color: red;
-	margin-top: 18%;
-	font-size: 120%;
-}
-
-#calculationResult{
+#calculationResultText{
     text-align: center;
 	color: black;
-	margin-top: 18%;
+	margin-top: 10%;
 	font-size: 120%;
 }

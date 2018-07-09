@@ -21,30 +21,28 @@ public class RomanNumeralController {
     private RomanNumeralCalculatorService calculator;
 
     @RequestMapping(method = RequestMethod.GET, value = "/add")
-    public ResponseEntity<RomanNumeral> addCalculation(@RequestParam("numeralOne") final String numeralOne,
-                                                       @RequestParam("numeralTwo") final String numeralTwo) {
-        final RomanNumeral response = calculator.add(numeralOne, numeralTwo);
+    public ResponseEntity<RomanNumeral> addCalculation(@RequestParam("numeralExpression") String numeralExpression) {
+        numeralExpression = numeralExpression.replace("%2B", "+");
+        final RomanNumeral response = calculator.add(numeralExpression);
         return ResponseEntity.ok(response);
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/subtract")
-    public ResponseEntity<RomanNumeral> subtractCalculation(@RequestParam("numeralOne") final String numeralOne,
-                                                            @RequestParam("numeralTwo") final String numeralTwo) {
-        final RomanNumeral response = calculator.subtract(numeralOne, numeralTwo);
+    @RequestMapping(method = RequestMethod.GET, value = "/subtract", headers = "Accept=application/json")
+    public ResponseEntity<RomanNumeral> subtractCalculation(@RequestParam("numeralExpression") final String numeralExpression) {
+        final RomanNumeral response = calculator.subtract(numeralExpression);
         return ResponseEntity.ok(response);
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/multiply")
-    public ResponseEntity<RomanNumeral> multiplyCalculation(@RequestParam("numeralOne") final String numeralOne,
-                                                            @RequestParam("numeralTwo") final String numeralTwo) {
-        final RomanNumeral response = calculator.multiply(numeralOne, numeralTwo);
+    @RequestMapping(method = RequestMethod.GET, value = "/multiply", headers = "Accept=application/json")
+    public ResponseEntity<RomanNumeral> multiplyCalculation(@RequestParam("numeralExpression") final String numeralExpression) {
+        final RomanNumeral response = calculator.multiply(numeralExpression);
         return ResponseEntity.ok(response);
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/divide")
-    public ResponseEntity<RomanNumeral> divideCalculation(@RequestParam("numeralOne") final String numeralOne,
-                                                          @RequestParam("numeralTwo") final String numeralTwo) {
-        final RomanNumeral response = calculator.divide(numeralOne, numeralTwo);
+    @RequestMapping(method = RequestMethod.GET, value = "/divide", headers = "Accept=application/json")
+    public ResponseEntity<RomanNumeral> divideCalculation(@RequestParam("numeralExpression") String numeralExpression) {
+        numeralExpression = numeralExpression.replace("%2F", "/");
+        final RomanNumeral response = calculator.divide(numeralExpression);
         return ResponseEntity.ok(response);
     }
 }

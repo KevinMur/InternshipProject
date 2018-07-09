@@ -1,12 +1,14 @@
 package com.ericsson.romannumeralcalculator.romannumeral;
 
+import java.io.Serializable;
+
 /**
  * @author ekvumer
  *
  *         Roman Numeral class used to return numeral information back to the UI
  */
 
-public class RomanNumeral {
+public class RomanNumeral implements Serializable {
 
     private String numeralValue;
 

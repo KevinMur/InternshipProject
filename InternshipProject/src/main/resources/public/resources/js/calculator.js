@@ -1,131 +1,113 @@
 
-var numeralOne, numeralTwo;
+var numeralExpression;
 
 $('document').ready(function(){
-	$(document).on('click', '#addButton', function(){
-		if(validateInputs()){
-			addNumerals();
-		}
-		return false;
-	});
-
-	$(document).on('click', '#subtractButton', function(){
-		if(validateInputs()){
-			subtractNumerals();
-		}
-		return false;
-	});
-	
-	$(document).on('click', '#multiplyButton', function(){
-		if(validateInputs()){
-			multiplyNumerals();
-		}
-		return false;
-	});
-	
-	$(document).on('click', '#divideButton', function(){
-		if(validateInputs()){
-			divideNumerals();
+	$(document).on('click', '#calculateButton', function(){
+		if(validateInput()){	
+			return true;
 		}
 		return false;
 	});
 });
 
-function validateInputs(){
-	numeralOne = $("#numeralInputOne").val();
-	numeralTwo = $("#numeralInputTwo").val();
-	if(numeralOne == "" || numeralTwo == ""){
-		$("#validationText").text("Both Fields Are Required !");
-		$("#calculationResult").empty();
+function validateInput(){
+	var expressionRegex = new RegExp("(^[A-Z]+)(\\s*)([+\-\/*])(\\s*)([A-Z]+$)");
+	numeralExpression = $('#numeralInput').val();
+
+	numeralExpression = numeralExpression.trim();
+
+	if(numeralExpression == ""){
+		$("#calculationResultText").text("Fields Required !").css('color', 'red');		
+		return false;
+	}else if(!expressionRegex.test(numeralExpression)){
+		$("#calculationResultText").text("Incorrect Format !").css('color', 'red');
 		return false;
 	}
+
+	if(numeralExpression.includes("+")){
+		addOperation();
+	}else if(numeralExpression.includes("-")){
+		subtractOperation();
+	}else if(numeralExpression.includes("*")){
+		multiplyOperation();
+	}else if(numeralExpression.includes("/")){
+		divideOperation();
+	}
+
+	$("#calculationResultText").empty();
 	return true;
 }
 
-function addNumerals(){   
+function addOperation(){ 
+	expressionSplit = numeralExpression.split("+");
+	console.log(expressionSplit);
 	$.ajax({
 		type: 'GET',
 		url: "/calculator/add",
 		contentType: "application/json",
 		dataType: "json",
 		data: {
-			numeralOne: numeralOne,
-			numeralTwo : numeralTwo
+			numeralExpression : numeralExpression
 		},
-		success: function(numeral){
-			console.log(numeral);
-			$("#calculationResult").text("Result: " + numeralOne + " + " + numeralTwo + " = " + numeral.numeralValue);
-			$("#validationText").empty();
+		success: function(numeral){		
+			$("#calculationResultText").text("Result: " + numeral.numeralValue).css('color', 'black');			
 		},
 		error: function(){
-			$("#calculationResult").empty();
-			$("#validationText").text("Incorrect Numeral Entered!");
+			$("#calculationResultText").text("Incorrect Numeral Entered!").css('color', 'red');
 		}
 	});
 }
 
-function subtractNumerals(){   
+function subtractOperation(){   
 	$.ajax({
 		type: 'GET',
 		url: "/calculator/subtract",
 		contentType: "application/json",
 		dataType: "json",
 		data: {
-			numeralOne: numeralOne,
-			numeralTwo : numeralTwo
+			numeralExpression: numeralExpression
 		},
 		success: function(numeral){
-			console.log(numeral);
-			$("#calculationResult").text("Result: " + numeralOne + " - " + numeralTwo + " = " + numeral.numeralValue);
-			$("#validationText").empty();
+			$("#calculationResultText").text("Result: " + numeral.numeralValue).css('color', 'black');	
 		},
 		error: function(){
-			$("#calculationResult").empty();
-			$("#validationText").text("Incorrect Numeral Entered!");
+			$("#calculationResultText").text("Incorrect Numeral Entered!").css('color', 'red');
 		}
 	});
 }
 
-function multiplyNumerals(){   
+function multiplyOperation(){   
 	$.ajax({
 		type: 'GET',
 		url: "/calculator/multiply",
 		contentType: "application/json",
 		dataType: "json",
 		data: {
-			numeralOne: numeralOne,
-			numeralTwo : numeralTwo
+			numeralExpression: numeralExpression
 		},
 		success: function(numeral){
-			console.log(numeral);
-			$("#calculationResult").text("Result: " + numeralOne + " * " + numeralTwo + " = " + numeral.numeralValue);
-			$("#validationText").empty();
+			$("#calculationResultText").text("Result: " + numeral.numeralValue).css('color', 'black');	
 		},
 		error: function(){
-			$("#calculationResult").empty();
-			$("#validationText").text("Incorrect Numeral Entered!");
+			$("#calculationResultText").text("Incorrect Numeral Entered!").css('color', 'red');
 		}
 	});
 }
 
-function divideNumerals(){   
+function divideOperation(){   
 	$.ajax({
 		type: 'GET',
 		url: "/calculator/divide",
 		contentType: "application/json",
 		dataType: "json",
 		data: {
-			numeralOne: numeralOne,
-			numeralTwo : numeralTwo
+			numeralExpression: numeralExpression
 		},
 		success: function(numeral){
-			console.log(numeral);
-			$("#calculationResult").text("Result: " + numeralOne + " / " + numeralTwo + " = " + numeral.numeralValue);
-			$("#validationText").empty();
+			$("#calculationResultText").text("Result: " + numeral.numeralValue).css('color', 'black');	
 		},
 		error: function(){
-			$("#calculationResult").empty();
-			$("#validationText").text("Incorrect Numeral Entered!");
+			$("#calculationResultText").text("Incorrect Numeral Entered!").css('color', 'red');
 		}
 	});
 }
