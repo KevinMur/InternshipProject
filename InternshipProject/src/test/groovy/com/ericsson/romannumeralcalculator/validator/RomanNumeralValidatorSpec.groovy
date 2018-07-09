@@ -47,7 +47,7 @@ class RomanNumeralValidatorSpec extends Specification{
             "I1",
             "XA",
             "IIV",
-            "IIIV",
+            "VIIII",
             "MMMMM"
         ]
     }

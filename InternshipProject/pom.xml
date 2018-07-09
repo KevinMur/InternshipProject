@@ -29,6 +29,7 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			
 			<plugin>
 				<groupId>org.codehaus.gmaven</groupId>
 				<artifactId>gmaven-plugin</artifactId>
@@ -76,6 +77,7 @@
 					</includes>
 				</configuration>
 			</plugin>
+			
 			<!--  plugin>
 				<groupId>org.sonarsource.scanner.maven</groupId>
 				<artifactId>sonar-maven-plugin</artifactId>
@@ -90,6 +92,7 @@
 					</execution>
 				</executions>
 			</plugin-->
+			
 			<plugin>
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
@@ -114,6 +117,7 @@
 					</execution>
 				</executions>
 			</plugin>
+			
 			<plugin>
 				<groupId>io.fabric8</groupId>
 				<artifactId>docker-maven-plugin</artifactId>
@@ -142,7 +146,6 @@
 						<id>start</id>
 						<phase>pre-integration-test</phase>
 						<goals>
-							<!-- "build" should be used to create the images with the artifact -->
 							<goal>build</goal>
 							<goal>start</goal>
 						</goals>
@@ -174,7 +177,6 @@
 					</execution>
 				</executions>
 			</plugin>
-			<!-- ********************************************************************* -->
 		</plugins>
 	</build>
 
