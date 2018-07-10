@@ -7,6 +7,6 @@ import cucumber.api.junit.Cucumber;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(features = "src/test/resources", glue = "steps")
-public class CalculatorIntegrationIT {
+public class CalculatorIT {
 
 }

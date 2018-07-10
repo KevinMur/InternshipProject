@@ -37,7 +37,9 @@
 
 #calculationResultText{
     text-align: center;
-	color: black;
+	color: white;
 	margin-top: 10%;
-	font-size: 120%;
+	margin-left: 30%;;
+	font-size: 140%;
+	width: 40%;
 }

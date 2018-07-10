@@ -17,10 +17,10 @@ function validateInput(){
 	numeralExpression = numeralExpression.trim();
 
 	if(numeralExpression == ""){
-		$("#calculationResultText").text("Fields Required !").css('color', 'red');		
+		$("#calculationResultText").text("Field Required!").css('color', 'red');		
 		return false;
 	}else if(!expressionRegex.test(numeralExpression)){
-		$("#calculationResultText").text("Incorrect Format !").css('color', 'red');
+		$("#calculationResultText").text("Incorrect Format!").css('color', 'red');
 		return false;
 	}
 
@@ -39,8 +39,6 @@ function validateInput(){
 }
 
 function addOperation(){ 
-	expressionSplit = numeralExpression.split("+");
-	console.log(expressionSplit);
 	$.ajax({
 		type: 'GET',
 		url: "/calculator/add",
@@ -50,7 +48,7 @@ function addOperation(){
 			numeralExpression : numeralExpression
 		},
 		success: function(numeral){		
-			$("#calculationResultText").text("Result: " + numeral.numeralValue).css('color', 'black');			
+			$("#calculationResultText").text(numeralExpression + " = " + numeral.numeralValue).css('color', 'black');			
 		},
 		error: function(){
 			$("#calculationResultText").text("Incorrect Numeral Entered!").css('color', 'red');
@@ -68,7 +66,7 @@ function subtractOperation(){
 			numeralExpression: numeralExpression
 		},
 		success: function(numeral){
-			$("#calculationResultText").text("Result: " + numeral.numeralValue).css('color', 'black');	
+			$("#calculationResultText").text(numeralExpression + " = " + numeral.numeralValue).css('color', 'black');	
 		},
 		error: function(){
 			$("#calculationResultText").text("Incorrect Numeral Entered!").css('color', 'red');
@@ -86,7 +84,7 @@ function multiplyOperation(){
 			numeralExpression: numeralExpression
 		},
 		success: function(numeral){
-			$("#calculationResultText").text("Result: " + numeral.numeralValue).css('color', 'black');	
+			$("#calculationResultText").text(numeralExpression + " = " + numeral.numeralValue).css('color', 'black');	
 		},
 		error: function(){
 			$("#calculationResultText").text("Incorrect Numeral Entered!").css('color', 'red');
@@ -104,7 +102,7 @@ function divideOperation(){
 			numeralExpression: numeralExpression
 		},
 		success: function(numeral){
-			$("#calculationResultText").text("Result: " + numeral.numeralValue).css('color', 'black');	
+			$("#calculationResultText").text(numeralExpression + " = " + numeral.numeralValue).css('color', 'black');	
 		},
 		error: function(){
 			$("#calculationResultText").text("Incorrect Numeral Entered!").css('color', 'red');
