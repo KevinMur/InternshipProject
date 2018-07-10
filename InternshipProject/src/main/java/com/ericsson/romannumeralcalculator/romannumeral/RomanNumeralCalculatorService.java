@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.ericsson.romannumeralcalculator.exceptions.ValidationException;
 import com.ericsson.romannumeralcalculator.operations.OperationInvoker;
-import com.ericsson.romannumeralcalculator.validator.ExpressionSplitter;
+import com.ericsson.romannumeralcalculator.splitter.ExpressionSplitter;
 import com.ericsson.romannumeralcalculator.validator.Validator;
 
 /**

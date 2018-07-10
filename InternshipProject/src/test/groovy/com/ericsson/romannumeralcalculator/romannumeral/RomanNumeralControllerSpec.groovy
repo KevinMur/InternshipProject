@@ -119,4 +119,15 @@ class RomanNumeralControllerSpec extends Specification{
         then: "status Bad Request should be returned"
         response.andExpect(status().isBadRequest())
     }
+
+    def "Controller should return bad request status for internal server error"(){
+        given: "calculator will throw exception"
+        doThrow(ArithmeticException.class).when(calculator).add("")
+
+        when: "controller recieves a request to carry out an addition"
+        def response = mockMvc.perform(get("/calculator/add").param("numeralExpression", "").contentType(MediaType.APPLICATION_JSON))
+
+        then: "status Bad Request should be returned"
+        response.andExpect(status().isInternalServerError())
+    }
 }

@@ -1,4 +1,4 @@
-package com.ericsson.romannumeralcalculator.validator;
+package com.ericsson.romannumeralcalculator.splitter;
 
 import org.springframework.stereotype.Component;
 
